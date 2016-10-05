@@ -1,4 +1,7 @@
 #pragma once
+#include "Memory.h"
+#include <string>
+using namespace std;
 
 class Controller {
     public:
@@ -7,6 +10,8 @@ class Controller {
         
         //Constructor
         Controller();
+
+        void load_code(string fname, Memory Stack);
 
         //Start running machine for limited number of cycles
         int run(int maxcycles);

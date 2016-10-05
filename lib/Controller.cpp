@@ -1,7 +1,7 @@
 #include "Controller.h"
-#include "store.h"
-#include "calculator.h"
+#include "Memory.h"
 
+#include <fstream>
 #include <iostream>  //For IO
 #include <cstring>   //For strlen
 #include <cstdlib>   //For stoi
@@ -11,6 +11,33 @@ using namespace std;
 
 Controller::Controller() {
     PC = 0; // initial instruction location
+}
+
+void Controller::load_code(string fname, Memory Stack) {
+
+    ifstream fin;
+    string data;
+
+    //Open file and store all line as strings
+    //Ints will be converted in decode step
+
+    fin.open(fname.c_str());
+
+    if(fin.is_open()) {
+        //FOR DEBUG
+        cout << "Attempting read" << endl;
+        int addr = 0;
+        while(!fin.eof()) {
+            fin >> data;
+            Stack.write(addr++,data);
+        }
+    }
+    else {cout << "Error opening file" << endl; }
+
+    //For debug
+    for (int i = 0; i < 10; i++){
+        cout << "Address " << i << ": " << Stack.RAM[i] << endl; 
+    }
 }
 
 //Begin controller loop for limited amount of time

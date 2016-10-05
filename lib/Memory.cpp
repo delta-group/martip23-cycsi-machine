@@ -9,6 +9,7 @@ string Memory::read(int addr) {
 }
 
 void Memory::write(int addr, string data) {
+    RAM[addr] = data;
 };
 
 void Memory::push(int data) {

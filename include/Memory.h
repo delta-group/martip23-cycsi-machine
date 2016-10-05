@@ -6,6 +6,7 @@ using namespace std;
 #define MAX_MEM 500
 
 class Memory {
+    public: //For debugging, don't forget to remove
     string RAM[MAX_MEM];            // code memory
     int STACK[MAX_MEM];             // data memory
 
