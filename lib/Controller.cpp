@@ -1,5 +1,4 @@
 #include "Controller.h"
-#include "Memory.h"
 
 #include <fstream>
 #include <iostream>  //For IO
@@ -13,7 +12,7 @@ Controller::Controller() {
     PC = 0; // initial instruction location
 }
 
-void Controller::load_code(string fname, Memory Stack) {
+void Controller::load_code(string fname) {
 
     ifstream fin;
     string data;
@@ -29,21 +28,22 @@ void Controller::load_code(string fname, Memory Stack) {
         int addr = 0;
         while(!fin.eof()) {
             fin >> data;
-            Stack.write(addr++,data);
+            memory.write(addr++,data);
         }
     }
     else {cout << "Error opening file" << endl; }
 
     //For debug
     for (int i = 0; i < 10; i++){
-        cout << "Address " << i << ": " << Stack.RAM[i] << endl; 
+        cout << "Address " << i << ": " << memory.RAM[i] << endl; 
     }
+    cout << "++++FINISHED COPYING INTO MEMORY++++\n" << endl;
 }
 
 //Begin controller loop for limited amount of time
 int Controller::run(int cycles_to_run) {
     int cycles;
-    MAXCYCLES = cycles_to_run;
+    MAXCYCLES =     cycles_to_run;
 
     // start the machine. One cycle includes 4 steps.
     for(cycles = 0; cycles < MAXCYCLES; cycles++) {
@@ -55,13 +55,14 @@ int Controller::run(int cycles_to_run) {
     return cycles;
 }
 
-void Controller::fetch()
-{
-
+void Controller::fetch(){
+    REGISTER = memory.RAM[PC];
+    cout << "Register " << PC << " holding: " << REGISTER << endl;
 };
 
 void Controller::decode()
 {
+    PC++;
 };
 
 void Controller::execute()
@@ -70,4 +71,5 @@ void Controller::execute()
 
 void Controller::store()
 {
+    cout << "~~~~~~~CYCLE " << PC << " COMPLETE~~~~~~~~~\n" << endl;
 };
