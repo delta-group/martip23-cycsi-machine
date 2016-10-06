@@ -5,7 +5,6 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
     Controller Machine;
-    Memory Stack;
 
     cout << "Cycsi (v2) running..." << endl;
     //FOR DEBUG

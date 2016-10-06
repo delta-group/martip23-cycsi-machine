@@ -1,5 +1,6 @@
 #pragma once
 #include "Memory.h"
+#include "ALU.h"
 #include <string>
 using namespace std;
 
@@ -7,9 +8,11 @@ class Controller {
     public:
         int PC;             // program counter
         int MAXCYCLES;      // stop when cycle count reaches this
-        string REGISTER;
+        string REGISTER;    // data cycle is workign on
+        bool data;          // T = data, F = instructions
 
-        Memory memory;
+        Memory memory;      //Load up memory
+        ALU alu;            //Load up ALU
         
         //Constructor
         Controller();

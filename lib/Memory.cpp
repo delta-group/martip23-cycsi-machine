@@ -5,7 +5,7 @@ Memory::Memory() {
 }
 
 string Memory::read(int addr) {
-    return "NOP";
+    return RAM[addr];
 }
 
 void Memory::write(int addr, string data) {

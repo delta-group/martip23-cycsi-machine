@@ -34,9 +34,9 @@ void Controller::load_code(string fname) {
     else {cout << "Error opening file" << endl; }
 
     //For debug
-    for (int i = 0; i < 10; i++){
-        cout << "Address " << i << ": " << memory.RAM[i] << endl; 
-    }
+//    for (int i = 0; i < 10; i++){
+//        cout << "Address " << i << ": " << memory.RAM[i] << endl; 
+//    }
     cout << "++++FINISHED COPYING INTO MEMORY++++\n" << endl;
 }
 
@@ -56,20 +56,55 @@ int Controller::run(int cycles_to_run) {
 }
 
 void Controller::fetch(){
-    REGISTER = memory.RAM[PC];
-    cout << "Register " << PC << " holding: " << REGISTER << endl;
+    REGISTER = memory.read(PC);
+//    cout << "Register " << PC << " holding: " << REGISTER << endl;
 };
 
 void Controller::decode()
 {
+    //Check if input is all numbers//
+    int length = strlen(REGISTER.c_str()); //Assigning length to length
+    
+    data = true; //Start boolean at true
+
+    for (int i = 0; i < (length-1); i++) {
+            if (not isdigit(REGISTER[i]))
+                {data = false;} //If not allnums will test false, then 
+                                //instruction
+    }
+    if (data) { 
+        //Assign tempInt to hold int for transfer and DEBUG
+        int tempInt = atoi(REGISTER.c_str());
+        memory.push(tempInt);
+        cout << tempInt << " added to STACK" << endl;
+    }
     PC++;
 };
 
+
 void Controller::execute()
 {
+    if (!data) 
+        if (REGISTER == "add") {
+            alu.add(0,0);
+        }
+        else if (REGISTER == "sub") {
+            alu.sub(0,0);
+        }       
+        else if (REGISTER == "mult") {
+            alu.mult(0,0);
+        }       
+        else if (REGISTER == "div") {
+            alu.div(0,0);
+        }       
+        else {
+            cout << "NOT A VALID INSTRUCTION" << endl;
+        }
+
+    
 };
 
 void Controller::store()
 {
-    cout << "~~~~~~~CYCLE " << PC << " COMPLETE~~~~~~~~~\n" << endl;
+    cout << "~~~~~~~CYCLE " << PC << " COMPLETE~~~~~~~~~" << endl;
 };
