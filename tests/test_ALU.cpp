@@ -3,5 +3,5 @@
 
 TEST_CASE( "ALU", "ALU" ){
     ALU  alu;
-    REQUIRE( alu.add(1,1) == 0 );
+    REQUIRE( alu.add(1,1) == 2 );
 }

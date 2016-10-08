@@ -24,7 +24,7 @@ void Controller::load_code(string fname) {
 
     if(fin.is_open()) {
         //FOR DEBUG
-        cout << "Attempting read" << endl;
+//        cout << "Attempting read" << endl;
         int addr = 0;
         while(!fin.eof()) {
             fin >> data;
@@ -37,7 +37,7 @@ void Controller::load_code(string fname) {
 //    for (int i = 0; i < 10; i++){
 //        cout << "Address " << i << ": " << memory.RAM[i] << endl; 
 //    }
-    cout << "++++FINISHED COPYING INTO MEMORY++++\n" << endl;
+//    cout << "++++FINISHED COPYING INTO MEMORY++++\n" << endl;
 }
 
 //Begin controller loop for limited amount of time
@@ -74,9 +74,7 @@ void Controller::decode()
     }
     if (data) { 
         //Assign tempInt to hold int for transfer and DEBUG
-        int tempInt = atoi(REGISTER.c_str());
-        memory.push(tempInt);
-        cout << tempInt << " added to STACK" << endl;
+        tempInt = atoi(REGISTER.c_str());
     }
     PC++;
 };
@@ -86,16 +84,20 @@ void Controller::execute()
 {
     if (!data) 
         if (REGISTER == "add") {
-            alu.add(0,0);
+            cout << "adding" << endl;
+            tempInt = alu.add(memory.pop(), memory.pop());
         }
         else if (REGISTER == "sub") {
-            alu.sub(0,0);
+            cout << "subbing" << endl;
+            tempInt = alu.sub(memory.pop(), memory.pop());
         }       
         else if (REGISTER == "mult") {
-            alu.mult(0,0);
+            cout << "multing" << endl;
+            tempInt = alu.mult(memory.pop(), memory.pop());
         }       
         else if (REGISTER == "div") {
-            alu.div(0,0);
+            cout << "divving" << endl;
+            tempInt = alu.div(memory.pop(), memory.pop());
         }       
         else {
             cout << "NOT A VALID INSTRUCTION" << endl;
@@ -106,5 +108,7 @@ void Controller::execute()
 
 void Controller::store()
 {
+    cout << "Pushing " << tempInt << " to stack." << endl;
+    memory.push(tempInt);
     cout << "~~~~~~~CYCLE " << PC << " COMPLETE~~~~~~~~~" << endl;
 };

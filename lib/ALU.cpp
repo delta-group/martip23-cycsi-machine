@@ -6,21 +6,17 @@ ALU::ALU() {
 }
 
 int ALU::add(int d1, int d2) {
-    cout << "Adding" << endl;
-    return 0;
+    return d1 + d2;
 }
 
 int ALU::sub(int d1, int d2){
-    cout << "Subbing" << endl;
-    return 0;
+    return d1 - d2;
 }
 
 int ALU::mult(int d1, int d2){
-    cout << "Multing" << endl;
-    return 0;
+    return d1 * d2;
 }
 
 int ALU::div(int d1, int d2){
-    cout << "Divving" << endl;
-    return 0;
+    return d1 / d2;
 }

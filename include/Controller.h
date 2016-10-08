@@ -10,6 +10,7 @@ class Controller {
         int MAXCYCLES;      // stop when cycle count reaches this
         string REGISTER;    // data cycle is workign on
         bool data;          // T = data, F = instructions
+        int tempInt;
 
         Memory memory;      //Load up memory
         ALU alu;            //Load up ALU

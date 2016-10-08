@@ -2,6 +2,7 @@
 
 // constructor
 Memory::Memory() {
+    SP = 0;
 }
 
 string Memory::read(int addr) {
@@ -13,8 +14,9 @@ void Memory::write(int addr, string data) {
 };
 
 void Memory::push(int data) {
+   STACK[SP++] = data;
 }
 
 int Memory::pop(void) {
-    return 0;
+    return STACK[--SP];
 }

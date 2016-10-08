@@ -9,6 +9,7 @@ class Memory {
     private: //For debugging, don't forget to remove
     string RAM[MAX_MEM];            // code memory
     int STACK[MAX_MEM];             // data memory
+    int SP; //Stack pointer
 
     public:
         Memory();               // constructor
